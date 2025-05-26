@@ -44,7 +44,7 @@ async function startApp() {
     const app = express();
     
     // Basic middleware
-    app.use(cors());
+    app.use(cors({origin:"*",credentials:true}));
     app.use(json());
     app.use(express.urlencoded({ extended: true }));
 
