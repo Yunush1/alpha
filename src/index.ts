@@ -5,6 +5,7 @@ import * as swaggerUi from 'swagger-ui-express';
 import { swaggerDocs } from './swagger'
 import { router } from "./routes/routes";
 import { ApolloServer } from '@apollo/server';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { createSchema } from "./graphql/schema";
 import "reflect-metadata";
 import * as cors from 'cors';
@@ -23,7 +24,9 @@ async function startApolloServer(app: Express) {
         formatError: (error) => {
             console.error('GraphQL Error:', error);
             return error;
-        }
+        },
+        introspection:true,
+        plugins:[ApolloServerPluginLandingPageLocalDefault()]
     });
 
     // Start the server
